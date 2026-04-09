@@ -774,6 +774,14 @@ body.lang-en #page-en { display: block; }
   position: relative;
   overflow: hidden;
 }
+.service-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: oklch(from var(--color-primary) l c h / 0.35);
+}
+.service-card {
+  transition: box-shadow var(--transition-interactive), transform var(--transition-interactive), border-color var(--transition-interactive);
+}
 .service-card::after {
   content: '';
   position: absolute;
@@ -1656,11 +1664,13 @@ document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeServic
 
 document.querySelectorAll('#ko-services .service-card').forEach((card, idx) => {
   const key = ['students','adults','business'][idx];
-  card.querySelector('.service-toggle').addEventListener('click', () => openServicePanel('ko', key));
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', () => openServicePanel('ko', key));
 });
 document.querySelectorAll('#en-services .service-card').forEach((card, idx) => {
   const key = ['students','adults','business'][idx];
-  card.querySelector('.service-toggle').addEventListener('click', () => openServicePanel('en', key));
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', () => openServicePanel('en', key));
 });
 
 // ---- Scroll reveal ----
