@@ -270,8 +270,66 @@ body.lang-en #page-en { display: block; }
   color: var(--color-text);
   background: var(--color-surface-2);
 }
-
-
+.theme-hint-wrap { position: relative; }
+.theme-hint {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 188px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transform: translateY(-6px) scale(0.97);
+  pointer-events: none;
+  transition: opacity 200ms ease, transform 200ms ease;
+  z-index: 200;
+}
+.theme-hint.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.theme-hint-arrow {
+  position: absolute;
+  top: -5px;
+  right: 10px;
+  width: 10px;
+  height: 10px;
+  background: var(--color-surface);
+  border-left: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border);
+  transform: rotate(45deg);
+}
+.theme-hint-body {
+  position: relative;
+  padding: 10px 32px 10px 12px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+.theme-hint-close {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  color: var(--color-text-faint);
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  transition: background var(--transition-interactive), color var(--transition-interactive);
+}
+.theme-hint-close:hover {
+  background: var(--color-surface-offset);
+  color: var(--color-text);
+}
 .header-nav {
   display: flex;
   align-items: center;
@@ -286,10 +344,9 @@ body.lang-en #page-en { display: block; }
   display: inline-flex;
   align-items: center;
 }
+.header-link:visited { color: var(--color-text-muted); }
 .header-link:hover { color: var(--color-primary); }
 .header-link.is-active { color: var(--color-text); }
-.header-link.is-active::after { content:''; width:100%; height:2px; background:var(--color-primary); position:absolute; left:0; bottom:-8px; border-radius:999px; }
-.header-link { position:relative; padding-inline: var(--space-1); }
 @media (max-width: 760px) { .header-nav { display:none; } }
 
 .service-modal-backdrop {
@@ -989,11 +1046,23 @@ body.lang-en #page-en { display: block; }
       <button class="mobile-nav-btn" id="mobile-nav-open" aria-label="Open navigation menu">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
-      <button class="theme-toggle" data-theme-toggle aria-label="Switch theme">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-        </svg>
-      </button>
+      <div class="theme-hint-wrap">
+        <button class="theme-toggle" data-theme-toggle aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+        </button>
+        <div class="theme-hint" id="theme-hint" aria-live="polite">
+          <div class="theme-hint-arrow"></div>
+          <div class="theme-hint-body">
+            <span class="theme-hint-ko">너무 어두우신가요?<br>밝은 모드로 바꿔보세요.</span>
+            <span class="theme-hint-en" style="display:none;">Too dark?<br>Try light mode.</span>
+            <button class="theme-hint-close" id="theme-hint-close" aria-label="Close">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </header>
@@ -1346,6 +1415,13 @@ body.lang-en #page-en { display: block; }
 <script>
 // ---- Language toggle ----
 let currentLang = 'ko';
+function updateThemeHintLanguage() {
+  const ko = currentLang === 'ko';
+  const koHint = document.querySelector('.theme-hint-ko');
+  const enHint = document.querySelector('.theme-hint-en');
+  if (koHint) koHint.style.display = ko ? 'block' : 'none';
+  if (enHint) enHint.style.display = ko ? 'none' : 'block';
+}
 
 function setLang(lang) {
   currentLang = lang;
@@ -1379,6 +1455,7 @@ function setLang(lang) {
     hide('back-top-ko');
     show('back-top-en', 'flex');
     document.title = 'Shin Gong Myeong Ryu — Korean/English Tutor & Translator';
+    updateThemeHintLanguage();
   } else {
     body.classList.remove('lang-en');
     show('page-ko');
@@ -1399,6 +1476,7 @@ function setLang(lang) {
     show('back-top-ko', 'flex');
     hide('back-top-en');
     document.title = '류신공명 — 한국어/영어 과외 & 번역';
+    updateThemeHintLanguage();
   }
 
   updateActiveNav();
@@ -1448,15 +1526,39 @@ function bindTopNav() {
 // ---- Dark / Light mode toggle ----
 (function(){
   const toggle = document.querySelector('[data-theme-toggle]');
+  const themeHint = document.getElementById('theme-hint');
+  const themeHintClose = document.getElementById('theme-hint-close');
   const root = document.documentElement;
   let dark = matchMedia('(prefers-color-scheme: dark)').matches;
   root.setAttribute('data-theme', dark ? 'dark' : 'light');
   updateToggleIcon();
+  updateThemeHintLanguage();
+
+  let hintTimer;
+  function showHint() {
+    if (!themeHint) return;
+    themeHint.classList.add('show');
+    clearTimeout(hintTimer);
+    hintTimer = setTimeout(() => themeHint.classList.remove('show'), 10000);
+  }
+  function hideHint() {
+    if (!themeHint) return;
+    clearTimeout(hintTimer);
+    themeHint.classList.remove('show');
+  }
+
+  setTimeout(showHint, 1400);
+
+  themeHintClose && themeHintClose.addEventListener('click', (e) => {
+    e.stopPropagation();
+    hideHint();
+  });
 
   toggle && toggle.addEventListener('click', () => {
     dark = !dark;
     root.setAttribute('data-theme', dark ? 'dark' : 'light');
     updateToggleIcon();
+    hideHint();
   });
 
   function updateToggleIcon() {
