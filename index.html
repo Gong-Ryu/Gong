@@ -1009,6 +1009,29 @@ body.lang-en #page-en { display: block; }
   .contact-box { padding: var(--space-6); }
   .about-sticky { position: static; }
 }
+
+  /* ---- Hero credential badges ---- */
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-full);
+    background: oklch(from var(--color-primary) l c h / 0.15);
+    color: var(--color-primary);
+    border: 1px solid oklch(from var(--color-primary) l c h / 0.3);
+    white-space: nowrap;
+  }
+  .hero-badge svg { flex-shrink: 0; }
 </style>
 </head>
 <body>
@@ -1081,6 +1104,12 @@ body.lang-en #page-en { display: block; }
       </div>
       <h1 class="hero-name hero-name-ko">류신공명</h1>
       <p class="hero-role" style="font-family:var(--font-korean)">한국어/영어 과외 &amp; 번역</p>
+      <div class="hero-badges">
+        <span class="hero-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          <span style="font-family:var(--font-korean)">TEFL 120 · TR 공인 자격증</span>
+        </span>
+      </div>
       <div class="hero-taglines">
         <div class="hero-tagline">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
@@ -1121,14 +1150,15 @@ body.lang-en #page-en { display: block; }
         </div>
         <div class="about-body fade-up">
           <div class="cred-strip">
+            <div class="cred-item"><span class="cred-val ko-font">TEFL 120</span><span class="cred-label ko-font">TR 공인 자격증 · 우수 수료</span></div>
+            <div class="cred-item"><span class="cred-val ko-font">Cisco</span><span class="cred-label ko-font">주니어 사이버보안 애널리스트</span></div>
             <div class="cred-item"><span class="cred-val">98%</span><span class="cred-label ko-font">12학년 영어</span></div>
-            <div class="cred-item"><span class="cred-val">92%</span><span class="cred-label ko-font">12학년 평균</span></div>
             <div class="cred-item"><span class="cred-val ko-font">Ontario Scholar</span><span class="cred-label ko-font">졸업 인증</span></div>
             <div class="cred-item"><span class="cred-val ko-font">LG</span><span class="cred-label ko-font">다국적 프로젝트 경험</span></div>
           </div>
-          <p class="ko">저는 여섯 살 때 한국에서 토론토로 이민을 왔습니다. 영어를 한 마디도 못한 채로 학교에 다니기 시작했고, 하나씩 익히며 버텼습니다. 졸업할 때는 <strong>Ontario Scholar</strong>로 졸업했고, 12학년 영어에서 <strong>98%</strong>를 받았습니다. 학생 때부터 가족의 통역사 역할을 자연스럽게 맡았고, 고등학교에서는 한국 교환학생들을 위한 <strong>앰배서더</strong>로 선발됐습니다.</p>
+          <p class="ko">저는 여섯 살 때 한국에서 토론토로 이민을 왔습니다. 영어를 한 마디도 못한 채로 학교에 다니기 시작했고, 하나씩 익히며 버텼습니다. 졸업할 때는 <strong>Ontario Scholar</strong>로 졸업했고, 12학년 영어에서 <strong>98%</strong>를 받았습니다. 그 경험을 바탕으로 최근 <strong>TEFL 120 자격증(TR 공인)</strong>을 취득해, 자연스럽게 해왔던 일에 체계를 더했습니다. 학교에 다니는 내내 가족의 통역사 역할을 자연스럽게 맡았고, 서류, 전화, 안내문 등을 처리하며 부모님이 캐나다에서 어렵지 않게 생활할 수 있도록 도왔습니다.</p>
           <div class="about-expand-wrap" id="about-expand-ko">
-            <p class="ko">고등학교에 올라가서는 학생회 임원으로 활동하면서 학생들의 목소리를 선생님들과 학교에 전달했고, 한국에서 온 교환학생들을 돕는 <strong>앰배서더</strong>로 선발되어 수업 적응부터 과제, 학교 문화, 친구 관계까지 함께 이야기 나눴어요.</p>
+            <p class="ko">고등학교에서는 <strong>학생회 임원</strong>으로 학생들의 목소리를 학교에 전달하는 한편, 한국에서 온 교환학생들을 위한 <strong>앰배서더</strong>로 선발되어 수업 적응, 과제, 학교 문화, 친구 관계까지 함께 이야기 나눴습니다.</p>
             <p class="ko">수업 밖에서도 같은 역량을 다양한 현장에서 써왔습니다. <strong>웨딩 촬영</strong>에서 신랑·신부와 업체들 사이를 조율하고, <strong>LG에서는 여러 나라 엔지니어들과 프로젝트를 함께 진행</strong>했으며, 리테일 매장에서는 고객 응대, 반품 처리, 배송 조율, 통역까지 담당했습니다.</p>
             <p class="ko">언어와 문화 사이를 오가야 하는 불안함과 기대 — 그 사이에 서 있는 느낌을 저는 누구보다 잘 알고 있습니다. 그래서 저는 지금, <strong>이 일을 하고 있습니다.</strong></p>
           </div>
@@ -1230,6 +1260,12 @@ body.lang-en #page-en { display: block; }
       </div>
       <h1 class="hero-name">Shin Gong Myeong Ryu</h1>
       <p class="hero-role">Korean/English Tutor &amp; Translator</p>
+      <div class="hero-badges">
+        <span class="hero-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          TEFL 120 · TR Certified
+        </span>
+      </div>
       <div class="hero-taglines">
         <div class="hero-tagline">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
@@ -1269,14 +1305,15 @@ body.lang-en #page-en { display: block; }
         </div>
         <div class="about-body fade-up">
           <div class="cred-strip">
+            <div class="cred-item"><span class="cred-val">TEFL 120</span><span class="cred-label">TR Certified · Distinction</span></div>
+            <div class="cred-item"><span class="cred-val">Cisco</span><span class="cred-label">Jr. Cybersecurity Analyst</span></div>
             <div class="cred-item"><span class="cred-val">98%</span><span class="cred-label">Gr. 12 English</span></div>
-            <div class="cred-item"><span class="cred-val">92%</span><span class="cred-label">Gr. 12 Average</span></div>
             <div class="cred-item"><span class="cred-val">Ontario Scholar</span><span class="cred-label">Grad. designation</span></div>
             <div class="cred-item"><span class="cred-val">LG</span><span class="cred-label">Multinational project work</span></div>
           </div>
-          <p>I moved from Korea to Toronto at age six with zero English. I adapted one word at a time, and by graduation earned an <strong>Ontario Scholar designation</strong>, a 92% Grade 12 average, and <strong>98% in Grade 12 English</strong>. While still learning the language myself, I became the family's de facto translator — handling calls, forms, and notices so my parents could navigate Canada without feeling lost.</p>
+          <p>I moved from Korea to Toronto at age six with zero English. I adapted one word at a time, and by graduation earned an <strong>Ontario Scholar designation</strong>, a 92% Grade 12 average, and <strong>98% in Grade 12 English</strong>. I've since formalised that foundation with a <strong>TEFL 120 certification (TR Certified)</strong> — giving structure to what I've always done naturally. While still learning the language myself, I became the family's de facto translator — handling calls, forms, and notices so my parents could navigate Canada without feeling lost.</p>
           <div class="about-expand-wrap" id="about-expand-en">
-            <p>In high school the same instinct grew. I served on <strong>student council as an executive</strong> and was selected as an <strong>ambassador for Korean exchange students</strong>, helping them handle academics, assignments, school culture, and the adjustment that comes with starting over in a completely different system.</p>
+            <p>In high school, I served on <strong>student council as an executive</strong> — representing student voices to teachers and administration — while also being selected as an <strong>ambassador for Korean exchange students</strong>, guiding them through academics, assignments, school culture, and the adjustment of starting over in a new country.</p>
             <p>Outside the classroom I kept using the same skills — coordinating <strong>wedding shoots</strong> as a photographer between couples and vendors, working with <strong>international engineers at LG</strong>, and handling customer service, returns, and translation in retail.</p>
             <p>I know what it feels like to stand on both sides of a language barrier — the anxiety, the effort, and the relief when someone explains things clearly. <strong>That's why I do this work.</strong></p>
           </div>
